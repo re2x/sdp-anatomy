@@ -1,759 +1,758 @@
 {
-  "sdpdata": [
-    {
-      "display": "grouping",
-      "lineNum": "1",
-      "indent": "0",
-      "section": "Global Lines"
-    },
-    {
-      "display": "line",
-      "lineNum": "1",
-      "indent": "0",
-      "section": "Global Lines",
-      "lineText": "o=- 4611731400430051336 2 IN IP4 127.0.0.1",
-      "description": "The first number is the session id, an unique identifier for the session . The number in second position - 2 -  is the session version: if a new offer\/answer negotiation is needed during this media session this number will be increased by one. This will happen when any parameter need to be changed in the media session such as on-hold, codec-change, add-remove media track. The three following fields are the network type (Internet), IP address type (version 4) and unicast address of the machine which created the SDP. These three values are not relevant for the negotiation."
-    },
-    {
-      "display": "line",
-      "lineNum": "2",
-      "indent": "0",
-      "section": "Global Lines",
-      "lineText": "s=-",
-      "description": "The s line contains a textual session name, which is not commonly used as you can see here."
-    },
-    {
-      "display": "line",
-      "lineNum": "3",
-      "indent": "0",
-      "section": "Global Lines",
-      "lineText": "t=0 0",
-      "description": "It gives the starting and ending time. When they are both set to 0 like our case it means that the session is not bounded to a specific timing- in other words it’s permanent and valid at any time."
-    },
-    {
-      "display": "line",
-      "lineNum": "4",
-      "indent": "0",
-      "section": "Global Lines",
-      "lineText": "a=group:BUNDLE audio video",
-      "description": "<em>BUNDLE<\/em> groupings establishes a relationship between several media lines included in the SDP, commonly <em>audio<\/em> and <em>video<\/em>. &nbsp;In WebRTC it’s use to multiplex several media flows in the same RTP session as described in <a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-sdp-bundle-negotiation\">draft-ietf-mmusic-sdp-bundle-negotiation<\/a>.&nbsp;In this case the browser offers to multiplex both audio and video, but that has to be also supported and accepted by the other side."
-    },
-    {
-      "display": "line",
-      "lineNum": "5",
-      "indent": "0",
-      "section": "Global Lines",
-      "lineText": "a=msid-semantic: WMS lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS",
-      "description": "This lines gives an unique identifier for the <a href=\"http:\/\/dev.w3.org\/2011\/webrtc\/editor\/getusermedia.html#stream-api\">WebRTC Media Stream (WMS)<\/a> during the PeerConnection’s life. This identifier that will be used in the a=msid attributes for each m-line belonging to a specific Media Stream (in our case both audio and video m-lines). This means that the RTP media stream (identified by the SSRC field present in every RTP packet) belongs to that media stream and that it is a track of that media stream.  It is an explicit association of an individual RTP media stream to the MediaStream WebRTC object. For more info about this refer to <a href=\"https:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid-13\">draft-ietf-mmusic-msid<\/a>"
-    },
-    {
-      "display": "grouping",
-      "lineNum": "2",
-      "indent": "1",
-      "section": "Audio Lines"
-    },
-    {
-      "display": "line",
-      "lineNum": "6",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "m=audio 58779 UDP\/TLS\/RTP\/SAVPF 111 103 104 9 0 8 106 105 13 126",
-      "description": "<p><em>m<\/em> means it is a media line –  it condenses a lot of information on the media attributes of the stream. In this order, it tells us:<ul><li><em>audio<\/em>- the media type is going to be used for the session (media types are registered at the IANA),<\/li><li><em>54278<\/em><span – the port is going to be used for SRTP (and for RTCP if RTCP multiplex is supported by the other peer),<\/li><li><em>RTP\/SAVPF<\/em>- the transport protocol is going to be used for the session, and last but not least<\/li><li><em>111 103 104 0 8 106 105 13 126<\/em>- the media format descriptions are supported by the browser to send and receive media.<\/li><\/ul>RTP\/SAVPF is defined in <a href=\"http:\/\/tools.ietf.org\/html\/rfc5124\">RFC5124<\/a>. In short it requires the use of SRTP and SRTCP and RTCP Feedback packets.<\/p><p>The media format descriptions, with protocol RTP\/SAVPF, gives the RTP payload numbers which are going to be used for the different formats.&nbsp; Payload numbers lower than 96 are mapped to encodingformats by the<a href=\"http:\/\/www.iana.org\/assignments\/rtp-parameters\/rtp-parameters.xhtml\">IANA<\/a>.&nbsp;In our SDP<em>0<\/em>maps to G711U and<em>8<\/em>to G711A. Format numbers larger than 95 are dynamic and there are <em>a=rtpmap:<\/em>&nbsp;attribute to map from the RTP payload type numbers to media encoding names.&nbsp; There are also<em>a=fmtp:<\/em> attributes which specify format parameters<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "7",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "c=IN IP4 217.130.243.155",
-      "description": "<em>c<\/em> is a connection line. This line gives the IP from where you expect to send and receive the real time traffic. As ICE is mandatory in WebRTC the IP in the c-line is not going to be used."
-    },
-    {
-      "display": "line",
-      "lineNum": "8",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "a=rtcp:51472 IN IP4 217.130.243.155",
-      "description": "This line explicitly specifies the IP and port that will used for RTCP, not derived from the base media port. Note that is the same port as for SRTP as RTCP multiplex is supported."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "3",
-      "indent": "2",
-      "section": "ICE Candidates"
-    },
-    {
-      "display": "line",
-      "lineNum": "9",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:1467250027 1 udp 2122260223 192.168.0.196 46243 typ host generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260223 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of use of resources. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "10",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:1467250027 2 udp 2122260222 192.168.0.196 56280 typ host generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTCP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260222 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of use of resources. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP. Please note that the browser does not know if the other end will support rtcp-mux, so it has to include a port for RTCP in the offer.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "11",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:435653019 1 tcp 1845501695 192.168.0.196 0 typ host tcptype active generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "12",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:435653019 2 tcp 1845501695 192.168.0.196 0 typ host tcptype active generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTCP over TCP - these lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "13",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:1853887674 1 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Reflexive candidate for RTP over UDP - here we have the server reflexive candidates. Note that they have lower priority than host candidates. These candidates are discovered thanks to STUN server (see this <a href=\"http:\/\/webrtchacks.com\/stun-helps-webrtc-traverse-nats\/>post<\/a> to learn more). The couple public public IP-port are included after the priority. The couple private IP-port after <em>typ srflx raddr<em> are the private IP:Port related (there is a NAT binding) to the public IP:Port where the traffic is going to be received.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "14",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:1853887674 2 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
-      "description": "<p>ICE lines are the mechanism chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Reflexive candidate for RTCP over UDP - here we have the server reflexive candidates. Note that they have lower priority than host candidates. These candidates are discovered thanks to STUN server (see this <a href=\"http:\/\/webrtchacks.com\/stun-helps-webrtc-traverse-nats\/>post<\/a> to learn more). The couple public public IP-port are included after the priority. The couple private IP-port after <em>typ srflx raddr<em> are the private IP:Port related (there is a NAT binding) to the public IP:Port where the traffic is going to be received.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "15",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:750991856 2 udp 25108222 237.30.30.30 51472 typ relay raddr 47.61.61.61 rport 54763 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (25108222 is higher) so the relay will be used only if  there is not IP connectivity between host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> correspond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "16",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Candidates",
-      "lineText": "a=candidate:750991856 1 udp 25108223 237.30.30.30 58779 typ relay raddr 47.61.61.61 rport 54761 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTCP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (25108222 is higher) so the relay will be used only if “hole punching” is not working with host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> correspond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
-    },
-    {
-      "display": "grouping",
-      "lineNum": "4",
-      "indent": "2",
-      "section": "ICE Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "17",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Parameters",
-      "lineText": "a=ice-ufrag:Oyef7uvBlwafI3hT",
-      "description": "Once the ICE candidates are exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
-    },
-    {
-      "display": "line",
-      "lineNum": "18",
-      "indent": "2",
-      "section": "Audio Lines -> ICE Parameters",
-      "lineText": "a=ice-pwd:T0teqPLNQQOf+5W+ls+P2p16",
-      "description": "Once the ICE candidates have been exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "4",
-      "indent": "2",
-      "section": "DTLS Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "19",
-      "indent": "2",
-      "section": "Audio Lines -> DTLS Parameters",
-      "lineText": "a=fingerprint:sha-256 49:66:12:17:0D:1C:91:AE:57:4C:C6:36:DD:D5:97:D2:7D:62:C9:9A:7F:B9:A3:F4:70:03:E7:43:91:73:23:5E",
-      "description": "This fingerprint is the result of a hash function (using sha-256 in this case) of the certificates used in the DTLS-SRTP negotiation. This line creates a binding between the signaling (which is supposed to be trusted) and the certificates used in DTLS, if the fingerprint doesn’t match, then the session should be rejected."
-    },
-    {
-      "display": "line",
-      "lineNum": "20",
-      "indent": "2",
-      "section": "Audio Lines -> DTLS Parameters",
-      "lineText": "a=setup:actpass",
-      "description": "This parameter means that this peer can be the server or the client which starts the DTLS negotiation. This parameter was initialing defined in RFC4145, which has been updated by RFC4572."
-    },
-    {
-      "display": "continuation",
-      "lineNum": "1",
-      "indent": "1",
-      "section": "Audio Lines"
-    },
-    {
-      "display": "line",
-      "lineNum": "21",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "a=mid:audio",
-      "description": "This is the identifier which is used in the BUNDLE line. In case we have different media we should have different identifiers for each."
-    },
-    {
-      "display": "line",
-      "lineNum": "22",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level",
-      "description": "RFC3550 defines the capability to extend the RTP header. This line defines extensions which will be used in RTP headers so that the receiver can decode it correctly and extract the metadata. In this case the browser is indicating that we are going to include information on the audio level in the RTP header as defined in RFC6464."
-    },
-    {
-      "display": "line",
-      "lineNum": "23",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "a=extmap:3 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time",
-      "description": "<a href=\"http:\/\/www.ietf.org\/rfc\/rfc3550.txt\">RFC3550<\/a> defines the capability to extend the RTP header. This line defines extensions which will be used in RTP headers so that the receiver can decode it correctly and extract the metadata. In this case the browser is indicating that we are going to include information on the audio level in the RTP header as defined in <a href=\"http:\/\/tools.ietf.org\/html\/rfc6464\">RFC6464<\/a>."
-    },
-    {
-      "display": "line",
-      "lineNum": "24",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "a=sendrecv",
-      "description": "This line says that the browser is willing to both send and receive audio in this session. Other values could be sendonly, recvonly and inactive which are used to implement different scenarios like putting calls on-hold."
-    },
-    {
-      "display": "line",
-      "lineNum": "25",
-      "indent": "1",
-      "section": "Audio Lines",
-      "lineText": "a=rtcp-mux",
-      "description": "This lines means that this peer supports multiplexing RTCP with RTP traffic."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "6",
-      "indent": "2",
-      "section": "Codec Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "26",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:111 opus\/48000\/2",
-      "description": "Opus is one of the MTI audio codecs for WebRTC. It features a variable bit rate (6kbps-510kbps) and is not under any royalty so it can be freely implemented in any browser (unlike other codecs like as G.729). Opus support is starting to become common and it has become critical for most WebRTC applications."
-    },
-    {
-      "display": "line",
-      "lineNum": "27",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=fmtp:111 minptime=10; useinbandfec=1",
-      "description": "This line includes optional payload-format-specific parameters supported by Chrome for audio Opus codec. minipitime=10 specifies the lowest value of the packetization time (ptime: the number of miliseconds of audio transported by a single packet). useinbandfec=1 specifies that the decoder has the capability to take advantage of the Opus in-band FEC (Forward Error Connection). For more info check RFC7587  "
-    },
-    {
-      "display": "line",
-      "lineNum": "28",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:103 ISAC\/16000",
-      "description": "The ISAC (Internet Speech Audio Codec) is a wideband speech codec for high quality conferences. The 16000 indicates  that ISAC is going to be used at 16kbps. Because this is first,  16kbps will be considered before ISAC at 32kbps as specified in the next line."
-    },
-    {
-      "display": "line",
-      "lineNum": "29",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:104 ISAC\/32000",
-      "description": "The ISAC (Internet Speech Audio Codec) is a wideband speech codec for high quality conferences. The 32000 indicates  that ISAC is going to be used at 32kbps. 16kbps will be considered before ISAC at 32kbps as specified in the previous line because it was first."
-    },
-    {
-      "display": "line",
-      "lineNum": "30",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:9 G722\/8000",
-      "description": "G722 is a wideband audio codec operating at 48, 56 and 64 kbit\/s which provides improved speech quality due to a wider speech bandwidth of 50–7000 Hz compared to narrowband speech coders like G.711. "
-    },
-    {
-      "display": "line",
-      "lineNum": "31",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:0 PCMU\/8000",
-      "description": "These lines specify G711 mu and a-law, which is a classic telecom 64kbps pulse code modulation (PCM) codec using different companding laws. 0 and 8 are the static payload types for PCMU and PCMA respectively. Technically these  lines do not to be present since this information can be inferred by the codec list in the media line - PCMU or PCMA."
-    },
-    {
-      "display": "line",
-      "lineNum": "32",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:8 PCMA\/8000",
-      "description": "These lines specify G711 mu and a-law, which is a classic telecom 64kbps pulse code modulation (PCM) codec using different companding laws. 0 and 8 are the static payload types for PCMU and PCMA respectively. Technically these  lines do not to be present since this information can be inferred by the codec list in the media line - PCMU or PCMA."
-    },
-    {
-      "display": "line",
-      "lineNum": "33",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:106 CN\/32000",
-      "description": "The dynamic RTP payload types above (except payload type 13 which is static) indicate that <a href=\"http:\/\/en.wikipedia.org\/wiki\/Comfort_noise\">Comfort Noise (CN) <\/a> is going to be used for codecs of rates 48000, 32000, 16000 and 8000 kbits\/s."
-    },
-    {
-      "display": "line",
-      "lineNum": "34",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:105 CN\/16000",
-      "description": "The dynamic RTP payload types above (except payload type 13 which is static) indicate that <a href=\"http:\/\/en.wikipedia.org\/wiki\/Comfort_noise\">Comfort Noise (CN) <\/a> is going to be used for codecs of rates 48000, 32000, 16000 and 8000 kbits\/s."
-    },
-    {
-      "display": "line",
-      "lineNum": "35",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:13 CN\/8000",
-      "description": "The dynamic RTP payload types above (except payload type 13 which is static) indicate that <a href=\"http:\/\/en.wikipedia.org\/wiki\/Comfort_noise\">Comfort Noise (CN) <\/a> is going to be used for codecs of rates 48000, 32000, 16000 and 8000 kbits\/s."
-    },
-    {
-      "display": "line",
-      "lineNum": "36",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:126 telephone-event\/8000",
-      "description": "This line indicates the browser supports RFC4733, allowing it to send DTMFs within the RTP not as the usual digitized sine waves but as a special payload (in this case with payload 126 in the RTP packet). This DTMF mechanism ensure that DTMFs will be transmitted independently of the audio codec and the signaling protocol."
-    },
-    {
-      "display": "line",
-      "lineNum": "37",
-      "indent": "2",
-      "section": "Audio Lines -> Codec Parameters",
-      "lineText": "a=maxptime:60",
-      "description": "maxptime specify the maximum amount of media that can be encapsulated in each packet, expressed as time in milliseconds. The size of the packet can have side effects in the quality of the audio and the BW. It is possible to modify this values in the SDP."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "7",
-      "indent": "2",
-      "section": "SSRC Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "38",
-      "indent": "2",
-      "section": "Audio Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:3570614608 cname:4TOk42mSjXCkVIa6",
-      "description": "The <em>cname<\/em> source attribute associates a media source with its <a href=\"http:\/\/www.freesoft.org\/CIE\/RFC\/1889\/24.htm\">Canonical End-Point Identifier<\/a> which will remain constant for the RTP media stream even when the ssrc identifier changes if a conflict is found. This is the value that the media sender will place in its <a href=\"https:\/\/tools.ietf.org\/html\/rfc3550#section-6.5\">RTCP SDES<\/a> packets."
-    },
-    {
-      "display": "line",
-      "lineNum": "39",
-      "indent": "2",
-      "section": "Audio Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:3570614608 msid:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS 35429d94-5637-4686-9ecd-7d0622261ce8",
-      "description": "This line is used to signal the association between the RTP concept of SSRC and the WebRTC concept of “media stream” \/ “media stream track” using SDP signaling [<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid\">draft-ietf-mmusic-msid<\/a>]. The first parameter corresponds to the id of the Media Stream and the second onde the if of the Media Stream Track. These ids are handled in the WebRTC API. The first number is the SSRC identifier that will be included in the SSRC field of the RTP packets. "
-    },
-    {
-      "display": "line",
-      "lineNum": "40",
-      "indent": "2",
-      "section": "Audio Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:3570614608 mslabel:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS",
-      "description": "The <em>mslabel<\/em> attribute referes to the id of the Media Stream object. Acording these references <a \"http:\/\/www.ietf.org\/mail-archive\/web\/mmusic\/current\/msg09712.html\">[1]<\/a> <a \"https:\/\/lists.w3.org\/Archives\/Public\/public-webrtc\/2014Sep\/0058.html\">[2]<\/a> the parameter is deprecated and <em>msid<\/em> replaces it. <em>mslabel<\/em> is kept for backward compability."
-    },
-    {
-      "display": "line",
-      "lineNum": "41",
-      "indent": "2",
-      "section": "Audio Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:3570614608 label:35429d94-5637-4686-9ecd-7d0622261ce8",
-      "description": "The <em>label<\/em> attribute is also deprecated by <em>msid<\/em> and carries a pointer to a RTP media stream in the context of an arbitrary network application that uses SDP. This label correspondes with the <em>Media Stream Track<\/em> id in the WebRTC API, which is included in the <em>msid<\/em> line. "
-    },
-    {
-      "display": "grouping",
-      "lineNum": "8",
-      "indent": "1",
-      "section": "Video Lines"
-    },
-    {
-      "display": "line",
-      "lineNum": "42",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "m=video 60372 UDP\/TLS\/RTP\/SAVPF 100 101 116 117 96",
-      "description": "<p><em>m<\/em> means it is a media line –  it condenses a lot of information on the media attributes of the stream. In this order, it tells us:<ul><li><em>audio<\/em>- the media type is going to be used for the session (media types are registered at the IANA),<\/li><li><em>54278<\/em><span – the port is going to be used for SRTP (and for RTCP if RTCP multiplex is supported by the other peer),<\/li><li><em>RTP\/SAVPF<\/em>- the transport protocol is going to be used for the session, and last but not least<\/li><li><em>100 101 116 117 96<\/em> -  the media format descriptions are supported by the browser to send and receive media.<\/li><\/ul>RTP\/SAVPF is defined in <a href=\"http:\/\/tools.ietf.org\/html\/rfc5124\">RFC5124<\/a>. In short it requires the use of SRTP and SRTCP and RTCP Feedback packets.<\/p><p>The media format descriptions, with protocol RTP\/SAVPF, gives the RTP payload numbers which are going to be used for the different formats.&nbsp; Payload numbers lower than 96 are mapped to encodingformats by the<a href=\"http:\/\/www.iana.org\/assignments\/rtp-parameters\/rtp-parameters.xhtml\">IANA<\/a>.&nbsp;In our SDP<em>0<\/em>maps to G711U and<em>8<\/em>to G711A. Format numbers larger than 95 are dynamic and there are <em>a=rtpmap:<\/em>&nbsp;attribute to map from the RTP payload type numbers to media encoding names.&nbsp; There are also<em>a=fmtp:<\/em> attributes which specify format parameters<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "43",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "c=IN IP4 217.130.243.155",
-      "description": "<em>c<\/em> is a connection line. This line gives the IP from where you expect to send and receive the real time traffic. As ICE is mandatory in WebRTC the IP in the c-line is not going to be used.(em>"
-    },
-    {
-      "display": "line",
-      "lineNum": "44",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=rtcp:64891 IN IP4 217.130.243.155",
-      "description": "This line specifies the IP and port that will used for RTCP if RTCP multiplexing is not supported by the other peer."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "9",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "description": "Next we have the ICE candidates. ICE is the protocol chosen to handle NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way."
-    },
-    {
-      "display": "line",
-      "lineNum": "45",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:1467250027 1 udp 2122260223 192.168.0.196 56143 typ host generation 0",
-      "description": "<p>Next we have the ICE candidates. ICE is the protocol chosen to handle NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260223 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of network resources use. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP. After the priority the IP of the local interface and the port to be used are included.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "46",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:1467250027 2 udp 2122260222 192.168.0.196 58874 typ host generation 0",
-      "description": "<p>Host candidate for RTP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260223 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of network resources use. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP. After the priority the IP of the local interface and the port to be used are included.  Please note that when the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "47",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:435653019 1 tcp 1518280447 192.168.0.196 0 typ host tcptype active generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "48",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:435653019 2 tcp 1518280446 192.168.0.196 0 typ host tcptype active generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation. When the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "49",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:1853887674 1 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation. When the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "50",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:1853887674 1 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation. When the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "51",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:750991856 1 udp 25108223 237.30.30.30 60372 typ relay raddr 47.61.61.61 rport 54765 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (2157334355 is higher) so the relay will be used only if there is not Ip connectivity between host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> crrespond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
-    },
-    {
-      "display": "line",
-      "lineNum": "52",
-      "indent": "2",
-      "section": "ICE Candidates",
-      "lineText": "a=candidate:750991856 2 udp 25108222 237.30.30.30 64891 typ relay raddr 47.61.61.61 rport 54767 generation 0",
-      "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (2157334355 is higher) so the relay will be used only if “hole punching” is not working with host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> correspond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
-    },
-    {
-      "display": "grouping",
-      "lineNum": "7",
-      "indent": "2",
-      "section": "ICE Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "53",
-      "indent": "2",
-      "section": "ICE Parameters",
-      "lineText": "a=ice-ufrag:Oyef7uvBlwafI3hT",
-      "description": "Once the ICE candidates have been exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
-    },
-    {
-      "display": "line",
-      "lineNum": "54",
-      "indent": "2",
-      "section": "ICE Parameters",
-      "lineText": "a=ice-pwd:T0teqPLNQQOf+5W+ls+P2p16",
-      "description": "Once the ICE candidates have been exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "10",
-      "indent": "2",
-      "section": "DTLS Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "55",
-      "indent": "2",
-      "section": "Video Lines -> DTLS Parameters",
-      "lineText": "a=fingerprint:sha-256 49:66:12:17:0D:1C:91:AE:57:4C:C6:36:DD:D5:97:D2:7D:62:C9:9A:7F:B9:A3:F4:70:03:E7:43:91:73:23:5E",
-      "description": "This fingerprint is the result of a hash function (using sha-256 in this case) of the certificates used in the DTLS-SRTP negotiation. This line creates a binding between the signaling (which is supposed to be trusted) and the certificates used in DTLS, if the fingerprint doesn’t match, then the session should be rejected."
-    },
-    {
-      "display": "line",
-      "lineNum": "56",
-      "indent": "2",
-      "section": "Video Lines -> DTLS Parameters",
-      "lineText": "a=setup:actpass",
-      "description": "This parameter means that this peer can be the server or the client which starts the DTLS negotiation. This parameter was initialing defined in RFC4145, which has been updated by RFC4572."
-    },
-    {
-      "display": "continuation",
-      "lineNum": "2",
-      "indent": "1",
-      "section": "Video Lines"
-    },
-    {
-      "display": "line",
-      "lineNum": "57",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=mid:video",
-      "description": "This is the identifier which is used in the BUNDLE line. As we have different media we have different identifiers for each."
-    },
-    {
-      "display": "line",
-      "lineNum": "58",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=extmap:2 urn:ietf:params:rtp-hdrext:toffset",
-      "description": "Chrome offers to use the timestamp offset header extension as defined in RFC 5450."
-    },
-    {
-      "display": "line",
-      "lineNum": "59",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=extmap:3 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time",
-      "description": "The Absolute Send Time extension is used to stamp RTP packets with a timestamp showing the departure time from the system that put this packet on the wire. See more details at: <a href=\"http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time\">http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time<\/a>"
-    },
-    {
-      "display": "line",
-      "lineNum": "60",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=extmap:4 urn:3gpp:video-orientation",
-      "description": "This extmap line ( the RTP Header Extensions  are specified in IETF RFC 5285) says that Chrome supports Coordination of Video Orientation (CVO) in SDP for all media streams containing video. In short, this extensions allows to inform about the orientation of the camera to the other side so that it can be displayed correctly. Coordination of Video Orientation consists in signalling of the current orientation of the image captured on the sender side to the receiver for appropriate rendering and displaying. For more info check this 3GPP document 3GPP TS 26.114"
-    },
-    {
-      "display": "line",
-      "lineNum": "61",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=sendrecv",
-      "description": "This line says that the browser is willing to both send and receive audio in this session. Other values could be sendonly, recvonly and inactive which are used to implement different scenarios like putting calls on-hold."
-    },
-    {
-      "display": "line",
-      "lineNum": "62",
-      "indent": "1",
-      "section": "Video Lines",
-      "lineText": "a=rtcp-mux",
-      "description": "This lines means that this peer supports multiplexing RTCP with RTP traffic."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "11",
-      "indent": "2",
-      "section": "Codec Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "63",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:100 VP8\/90000",
-      "description": "This lines says is that VP8 is asigned to payload type 100. It will mean that the value of the Payload Type field of the RTP packets containing VP8 video frames within this session will be 100. This RFC Draft defines the particularites of VP8 PT: http:\/\/tools.ietf.org\/html\/draft-ietf-payload-vp8 Right now VP8 is only MPI codec in WebRTC. Right now VP8 is the MTI codec for video, things may change in the future."
-    },
-    {
-      "display": "line",
-      "lineNum": "64",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:100 ccm fir",
-      "description": "This lines requests the use of FIR (Full Intraframe Request), as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc5104\">RFC 5104<\/a>. It is included since Chrome M27."
-    },
-    {
-      "display": "line",
-      "lineNum": "65",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:100 nack",
-      "description": "This lines requests the use of Negative ACKs (nack) as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585\">RFC 4585<\/a>. This allows to make the other end aware about packet losses.  "
-    },
-    {
-      "display": "line",
-      "lineNum": "66",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:100 nack pli",
-      "description": "This lines states that PLI NACK RTCP messages are supported. This allows to ask for a new VP8 key frame the other endpoint when video packets have been lost. Please refer to <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585#page-36\">RFC4585<\/a> for more information."
-    },
-    {
-      "display": "line",
-      "lineNum": "67",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:100 goog-remb",
-      "description": "This parameter is defined in draft-alvestrand-rmcat-remb. It defines the use of an RTCP message for Receiver Estimated Maximum Bitrate. The prefix goog- means that is still something implemented only by Google and non standard. "
-    },
-    {
-      "display": "line",
-      "lineNum": "68",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:101 VP9\/90000",
-      "description": "Chrome supports VP9 from version 48. You can learn about the features of this video codec at the Web M project site. By default it appears as the second option in the SDP after VP8."
-    },
-    {
-      "display": "line",
-      "lineNum": "69",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:101 ccm fir",
-      "description": "This lines requests the use of FIR (Full Intraframe Request), as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc5104\">RFC 5104<\/a>. It is included since Chrome M27."
-    },
-    {
-      "display": "line",
-      "lineNum": "70",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:101 nack",
-      "description": "This lines requests the use of Negative ACKs (nack) as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585\">RFC 4585<\/a>. This allows to make the other end aware about packet losses.  "
-    },
-    {
-      "display": "line",
-      "lineNum": "71",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:101 nack pli",
-      "description": "This lines states that PLI NACK RTCP messages are supported. This allows to ask for a new VP9 key frame the other endpoint when video packets have been lost. Please refer to <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585#page-36\">RFC4585<\/a> for more information."
-    },
-    {
-      "display": "line",
-      "lineNum": "72",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtcp-fb:101 goog-remb",
-      "description": "This parameter is defined in <a href=\"https:\/\/tools.ietf.org\/html\/draft-alvestrand-rmcat-remb-03\">draft-alvestrand-rmcat-remb<\/a>. It defines the use of an RTCP message for Receiver Estimated Maximum Bitrate. The prefix goog- means that is still something implemented only by Google and non standard. "
-    },
-    {
-      "display": "line",
-      "lineNum": "73",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:116 red\/90000",
-      "description": "This lines requests the use of RFC2198 which defines a payload format to encode redundant media data. In WebRTC this is used to encapsulate the payload  VP8 (the video payload itself) and FEC (which is explained in the line below).  "
-    },
-    {
-      "display": "line",
-      "lineNum": "74",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:117 ulpfec\/90000",
-      "description": "This lines requests the use of ULP FEC (defined in RFC5109) . FEC (Forward Error Correction) allows to correct incorrect some kind of errors in data transmission by sending redundant information based on the original packet. FEC is used when there is packet loss (which is reported in RTCP-RR packets)."
-    },
-    {
-      "display": "line",
-      "lineNum": "75",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=rtpmap:96 rtx\/90000",
-      "description": "The parameters rtx and apt are defined in the RFC4588. This RFC defines a RTP payload format just for performing retransmissions of packets which have not been received by the other side. Packets can not be retransmitted using the original payload as it would break RTP and RTCP mechanisms so they are retransmitted in a retransmission stream with a different payload. The 90000 refers to the clockrate of the retransmitted stream which is the same as the original VP8 stream which is, as other video protocols, 90000."
-    },
-    {
-      "display": "line",
-      "lineNum": "76",
-      "indent": "2",
-      "section": "Video Lines -> Codec Parameters",
-      "lineText": "a=fmtp:96 apt=100",
-      "description": "This line says that the RTP packets with payload 96 will transport rtx messages for the codec which has been asigned the payload 100 in this SDP (VP8)."
-    },
-    {
-      "display": "grouping",
-      "lineNum": "12",
-      "indent": "2",
-      "section": "SSRC Parameters"
-    },
-    {
-      "display": "line",
-      "lineNum": "77",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc-group:FID 2231627014 632943048",
-      "description": "This line declares that SSRC 632943048 is a rtx repair flow (<a href=\"https:\/\/tools.ietf.org/html/rfc4588\">RFC4588<\/a>) for 2231627014 as specified in <a href=\"https:\/\/tools.ietf.org/html/rfc5576\">RFC5576<\/a>"
-    },
-    {
-      "display": "line",
-      "lineNum": "78",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:2231627014 cname:4TOk42mSjXCkVIa6",
-      "description": "The <em>cname<\/em> source attribute associates a media source with its <a href=\"http:\/\/www.freesoft.org\/CIE\/RFC\/1889\/24.htm\">Canonical End-Point Identifier<\/a> which will remain constant for the RTP media stream. This is the value that the media sender will place in its <a href=\"https:\/\/tools.ietf.org\/html\/rfc3550#section-6.5\">RTCP SDES<\/a> packets."
-    },
-    {
-      "display": "line",
-      "lineNum": "79",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:2231627014 msid:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS daed9400-d0dd-4db3-b949-422499e96e2d",
-      "description": "This line is used to signal the association between the RTP concept of SSRC and the WebRTC concept of “media stream” \/ “media stream track” using SDP signaling [<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid\">draft-ietf-mmusic-msid<\/a>]. As you can see, the first number is the SSRC identifier that will be included in the SSRC field of the RTP packets. Following <em>msid<\/em>: we have the unique identifier included  in the semantic."
-    },
-    {
-      "display": "line",
-      "lineNum": "80",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:2231627014 mslabel:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS",
-      "description": "Honestly, I has not been able to totally understand the <em>mslabel<\/em> attribute. Looking at this <a href=\"http:\/\/www.ietf.org\/mail-archive\/web\/mmusic\/current\/msg09780.html\">mail thread<\/a> I understand that is a deprecated attribute which a function similar to msid."
-    },
-    {
-      "display": "line",
-      "lineNum": "81",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:2231627014 label:daed9400-d0dd-4db3-b949-422499e96e2d",
-      "description": "The second group of ssrc attributes are for the retransmissions stream, note that the cname is the same as in the group above."
-    },
-    {
-      "display": "line",
-      "lineNum": "82",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:632943048 cname:4TOk42mSjXCkVIa6",
-      "description": "The <em>cname<\/em> source attribute associates a media source with its <a href=\"http:\/\/www.freesoft.org\/CIE\/RFC\/1889\/24.htm\">Canonical End-Point Identifier<\/a> which will remain constant for the RTP media stream. This is the value that the media sender will place in its <a href=\"https:\/\/tools.ietf.org\/html\/rfc3550#section-6.5\">RTCP SDES<\/a> packets."
-    },
-    {
-      "display": "line",
-      "lineNum": "83",
-      "indent": "2",
-      "section": "Video Lines -> SSRC Parameters",
-      "lineText": "a=ssrc:632943048 msid:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS daed9400-d0dd-4db3-b949-422499e96e2d",
-      "description": "This line is used to signal the association between the RTP concept of SSRC and the WebRTC concept of “media stream” \/ “media stream track” using SDP signaling [<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid\">draft-ietf-mmusic-msid<\/a>]. As you can see, the first number is the SSRC identifier that will be included in the SSRC field of the RTP packets. Following <em>msid<\/em>: we have the unique identifier included  in the semantic."
-    }
-  ]
+    "sdpdata": [{
+            "display": "grouping",
+            "lineNum": "1",
+            "indent": "0",
+            "section": "全局"
+        },
+        {
+            "display": "line",
+            "lineNum": "1",
+            "indent": "0",
+            "section": "全局",
+            "lineText": "o=- 4611731400430051336 2 IN IP4 127.0.0.1",
+            "description": "其格式为：o=&lt;username&gt; &lt;sess-id&gt; &lt;sess-version&gt; &lt;nettype&gt; &lt;addrtype&gt; &lt;unicast-address&gt; </br> 第一个数字是会话id，唯一标识此会话。第二个数字 2 是会话标号: 如果在该会话期间需要新的offer answer协商，则该数字将增加1. 当会话中需要更改任何参数（例如保持，编解码器更改，添加删除媒体轨道）时，会发生这种情况。 后面三个字段描述了创SDP的计算机的网络类型(Internet), IP地址版本号(version 4) 以及单播地址。 这三个参数和协商没有无关"
+        },
+        {
+            "display": "line",
+            "lineNum": "2",
+            "indent": "0",
+            "section": "全局",
+            "lineText": "s=-",
+            "description": "s行描述了会话字面名称, 一般不会用到这个参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "3",
+            "indent": "0",
+            "section": "全局",
+            "lineText": "t=0 0",
+            "description": "会话开始时间和结束时间。当二者都为0时， 意味着会话不受时间影响，在任何时间内都是有效的。"
+        },
+        {
+            "display": "line",
+            "lineNum": "4",
+            "indent": "0",
+            "section": "全局",
+            "lineText": "a=group:BUNDLE audio video",
+            "description": "描述多个媒体线路，通常是音频和视频。在WebRTC中，它用于在与<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-sdp-bundle-negotiation\">draft-ietf-mmusic-sdp-bundle-negotiation<\/a>.&nbsp;中所描述的相同的RTP会话中复用多个媒体流。 在这种情况下，浏览器提供多路复用音频和视频，但是还必须由另一方支持和接受。"
+        },
+        {
+            "display": "line",
+            "lineNum": "5",
+            "indent": "0",
+            "section": "全局",
+            "lineText": "a=msid-semantic: WMS lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS",
+            "description": "此行给出了在PeerConnection生命期间 <a href=\"http:\/\/dev.w3.org\/2011\/webrtc\/editor\/getusermedia.html#stream-api\">WebRTC Media Stream (WMS)<\/a> 的唯一标识。 此标识将用于属于特定媒体流（在我们的例子中为音频和视频m行）的每个m行的a=msid属性中。这意味着RTP流（每个RTP包中存在的SSRC标识）属于该媒体流，并且它是该媒体流的轨道。 它是单个RTP流到MediaStream WebRTC对象的显式关联。更多信息，请参阅<a href=\"https:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid-13\">draft-ietf-mmusic-msid<\/a>。"
+        },
+        {
+            "display": "grouping",
+            "lineNum": "2",
+            "indent": "1",
+            "section": "音频"
+        },
+        {
+            "display": "line",
+            "lineNum": "6",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "m=audio 58779 UDP\/TLS\/RTP\/SAVPF 111 103 104 9 0 8 106 105 13 126",
+            "description": "m表示它是一个媒体行，表示关于流媒体属性的信息。按照顺序：<ul><li><em>audio<\/em> – 会话的媒体类型，此处为音频，具体媒体类型是在IANA注册的。<\/li> <li><em>54278<\/em> – SRTP端口 <\/li> <li><em>UDP\/TLS\/RTP\/SAVPF<\/em> - 会话用到的传输协议 <p>RTP\/SAVPF 在 <a href=\"http:\/\/tools.ietf.org\/html\/rfc5124\">RFC5124<\/a> 被定义。它需要使用SRTP、SRTCP和RTCP来反馈数据包。 <\/p> <\/li> <li><em>111 103 104 0 8 106 105 13 126<\/em> - 支持的媒体格式，即RTP有效载荷（RTP Payload） <p>给出将要用于不同格式的RTP有效载荷数。 低于96的Payload由<a href=\"http:\/\/www.iana.org\/assignments\/rtp-parameters\/rtp-parameters.xhtml\">IANA<\/a>定义具体的格式。在此SDP中0对应于G711U和8对应于G711A。 而大于95的格式号是动态的，需要有一个a=rtpmap:行来描述RTP Payload编号赖映射到具体的编码名称。同时还有a=fmtp:行来指定编码格式参数。<\/p><\/li><\/ul>"
+        },
+        {
+            "display": "line",
+            "lineNum": "7",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "c=IN IP4 217.130.243.155",
+            "description": "<em>c<\/em> 链接信息行。这行给出了一个IP，用于事实数据的收发。由于WebRTC的强制ICE机制，所以这一行信息不会有任何作用。"
+        },
+        {
+            "display": "line",
+            "lineNum": "8",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "a=rtcp:51472 IN IP4 217.130.243.155",
+            "description": "此行给出一个特定的IP和端口用于RTCP，而不是使用m行的端口。注意，因为WebRTC支持RTCP多路复用，此端口与SRTP需相同的端口。"
+        },
+        {
+            "display": "grouping",
+            "lineNum": "3",
+            "indent": "2",
+            "section": "音频 ICE Candidates"
+        },
+        {
+            "display": "line",
+            "lineNum": "9",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:1467250027 1 udp 2122260223 192.168.0.196 46243 typ host generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260223 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of use of resources. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "10",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:1467250027 2 udp 2122260222 192.168.0.196 56280 typ host generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTCP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260222 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of use of resources. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP. Please note that the browser does not know if the other end will support rtcp-mux, so it has to include a port for RTCP in the offer.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "11",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:435653019 1 tcp 1845501695 192.168.0.196 0 typ host tcptype active generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "12",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:435653019 2 tcp 1845501695 192.168.0.196 0 typ host tcptype active generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTCP over TCP - these lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "13",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:1853887674 1 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Reflexive candidate for RTP over UDP - here we have the server reflexive candidates. Note that they have lower priority than host candidates. These candidates are discovered thanks to STUN server (see this <a href=\"http:\/\/webrtchacks.com\/stun-helps-webrtc-traverse-nats\/>post<\/a> to learn more). The couple public public IP-port are included after the priority. The couple private IP-port after <em>typ srflx raddr<em> are the private IP:Port related (there is a NAT binding) to the public IP:Port where the traffic is going to be received.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "14",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:1853887674 2 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
+            "description": "<p>ICE lines are the mechanism chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Reflexive candidate for RTCP over UDP - here we have the server reflexive candidates. Note that they have lower priority than host candidates. These candidates are discovered thanks to STUN server (see this <a href=\"http:\/\/webrtchacks.com\/stun-helps-webrtc-traverse-nats\/>post<\/a> to learn more). The couple public public IP-port are included after the priority. The couple private IP-port after <em>typ srflx raddr<em> are the private IP:Port related (there is a NAT binding) to the public IP:Port where the traffic is going to be received.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "15",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:750991856 2 udp 25108222 237.30.30.30 51472 typ relay raddr 47.61.61.61 rport 54763 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (25108222 is higher) so the relay will be used only if  there is not IP connectivity between host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> correspond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "16",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE Candidates",
+            "lineText": "a=candidate:750991856 1 udp 25108223 237.30.30.30 58779 typ relay raddr 47.61.61.61 rport 54761 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTCP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (25108222 is higher) so the relay will be used only if “hole punching” is not working with host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> correspond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
+        },
+        {
+            "display": "grouping",
+            "lineNum": "4",
+            "indent": "2",
+            "section": "音频 ICE 参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "17",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE 参数",
+            "lineText": "a=ice-ufrag:Oyef7uvBlwafI3hT",
+            "description": "Once the ICE candidates are exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
+        },
+        {
+            "display": "line",
+            "lineNum": "18",
+            "indent": "2",
+            "section": "音频 -> 音频 ICE 参数",
+            "lineText": "a=ice-pwd:T0teqPLNQQOf+5W+ls+P2p16",
+            "description": "Once the ICE candidates have been exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
+        },
+        {
+            "display": "grouping",
+            "lineNum": "4",
+            "indent": "2",
+            "section": "音频 DTLS 参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "19",
+            "indent": "2",
+            "section": "音频 -> 音频 DTLS 参数",
+            "lineText": "a=fingerprint:sha-256 49:66:12:17:0D:1C:91:AE:57:4C:C6:36:DD:D5:97:D2:7D:62:C9:9A:7F:B9:A3:F4:70:03:E7:43:91:73:23:5E",
+            "description": "This fingerprint is the result of a hash function (using sha-256 in this case) of the certificates used in the DTLS-SRTP negotiation. This line creates a binding between the signaling (which is supposed to be trusted) and the certificates used in DTLS, if the fingerprint doesn’t match, then the session should be rejected."
+        },
+        {
+            "display": "line",
+            "lineNum": "20",
+            "indent": "2",
+            "section": "音频 -> 音频 DTLS 参数",
+            "lineText": "a=setup:actpass",
+            "description": "This parameter means that this peer can be the server or the client which starts the DTLS negotiation. This parameter was initialing defined in RFC4145, which has been updated by RFC4572."
+        },
+        {
+            "display": "continuation",
+            "lineNum": "1",
+            "indent": "1",
+            "section": "音频"
+        },
+        {
+            "display": "line",
+            "lineNum": "21",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "a=mid:audio",
+            "description": "This is the identifier which is used in the BUNDLE line. In case we have different media we should have different identifiers for each."
+        },
+        {
+            "display": "line",
+            "lineNum": "22",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level",
+            "description": "RFC3550 defines the capability to extend the RTP header. This line defines extensions which will be used in RTP headers so that the receiver can decode it correctly and extract the metadata. In this case the browser is indicating that we are going to include information on the audio level in the RTP header as defined in RFC6464."
+        },
+        {
+            "display": "line",
+            "lineNum": "23",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "a=extmap:3 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time",
+            "description": "<a href=\"http:\/\/www.ietf.org\/rfc\/rfc3550.txt\">RFC3550<\/a> defines the capability to extend the RTP header. This line defines extensions which will be used in RTP headers so that the receiver can decode it correctly and extract the metadata. In this case the browser is indicating that we are going to include information on the audio level in the RTP header as defined in <a href=\"http:\/\/tools.ietf.org\/html\/rfc6464\">RFC6464<\/a>."
+        },
+        {
+            "display": "line",
+            "lineNum": "24",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "a=sendrecv",
+            "description": "This line says that the browser is willing to both send and receive audio in this session. Other values could be sendonly, recvonly and inactive which are used to implement different scenarios like putting calls on-hold."
+        },
+        {
+            "display": "line",
+            "lineNum": "25",
+            "indent": "1",
+            "section": "音频",
+            "lineText": "a=rtcp-mux",
+            "description": "启用音频rtp和rtcp混流。。rtcp mux是一种通过一个socket端口同时传输rtp和rtcp的方法，webrtc规范强制使用 rtcp mux方法，但是 许多传统voip设置并不支持此方法，通常都是rtp用一个端口，rtcp用rtp+1端口号，至少目前chrome和firefox都是强制使用rtcp-mux, 所以如果传统voip客户端如果想和webrtc浏览器客户端互通时需要借助中间网关实现转换功能。否则rtcp功能会失效，影响通话效果。"
+        },
+        {
+            "display": "grouping",
+            "lineNum": "6",
+            "indent": "2",
+            "section": "音频编解码参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "26",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:111 opus\/48000\/2",
+            "description": "Opus is one of the MTI audio codecs for WebRTC. It features a variable bit rate (6kbps-510kbps) and is not under any royalty so it can be freely implemented in any browser (unlike other codecs like as G.729). Opus support is starting to become common and it has become critical for most WebRTC applications."
+        },
+        {
+            "display": "line",
+            "lineNum": "27",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=fmtp:111 minptime=10; useinbandfec=1",
+            "description": "This line includes optional payload-format-specific parameters supported by Chrome for audio Opus codec. minipitime=10 specifies the lowest value of the packetization time (ptime: the number of miliseconds of audio transported by a single packet). useinbandfec=1 specifies that the decoder has the capability to take advantage of the Opus in-band FEC (Forward Error Connection). For more info check RFC7587  "
+        },
+        {
+            "display": "line",
+            "lineNum": "28",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:103 ISAC\/16000",
+            "description": "The ISAC (Internet Speech Audio Codec) is a wideband speech codec for high quality conferences. The 16000 indicates  that ISAC is going to be used at 16kbps. Because this is first,  16kbps will be considered before ISAC at 32kbps as specified in the next line."
+        },
+        {
+            "display": "line",
+            "lineNum": "29",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:104 ISAC\/32000",
+            "description": "The ISAC (Internet Speech Audio Codec) is a wideband speech codec for high quality conferences. The 32000 indicates  that ISAC is going to be used at 32kbps. 16kbps will be considered before ISAC at 32kbps as specified in the previous line because it was first."
+        },
+        {
+            "display": "line",
+            "lineNum": "30",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:9 G722\/8000",
+            "description": "G722 is a wideband audio codec operating at 48, 56 and 64 kbit\/s which provides improved speech quality due to a wider speech bandwidth of 50–7000 Hz compared to narrowband speech coders like G.711. "
+        },
+        {
+            "display": "line",
+            "lineNum": "31",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:0 PCMU\/8000",
+            "description": "These lines specify G711 mu and a-law, which is a classic telecom 64kbps pulse code modulation (PCM) codec using different companding laws. 0 and 8 are the static payload types for PCMU and PCMA respectively. Technically these  lines do not to be present since this information can be inferred by the codec list in the media line - PCMU or PCMA."
+        },
+        {
+            "display": "line",
+            "lineNum": "32",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:8 PCMA\/8000",
+            "description": "These lines specify G711 mu and a-law, which is a classic telecom 64kbps pulse code modulation (PCM) codec using different companding laws. 0 and 8 are the static payload types for PCMU and PCMA respectively. Technically these  lines do not to be present since this information can be inferred by the codec list in the media line - PCMU or PCMA."
+        },
+        {
+            "display": "line",
+            "lineNum": "33",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:106 CN\/32000",
+            "description": "The dynamic RTP payload types above (except payload type 13 which is static) indicate that <a href=\"http:\/\/en.wikipedia.org\/wiki\/Comfort_noise\">Comfort Noise (CN) <\/a> is going to be used for codecs of rates 48000, 32000, 16000 and 8000 kbits\/s."
+        },
+        {
+            "display": "line",
+            "lineNum": "34",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:105 CN\/16000",
+            "description": "The dynamic RTP payload types above (except payload type 13 which is static) indicate that <a href=\"http:\/\/en.wikipedia.org\/wiki\/Comfort_noise\">Comfort Noise (CN) <\/a> is going to be used for codecs of rates 48000, 32000, 16000 and 8000 kbits\/s."
+        },
+        {
+            "display": "line",
+            "lineNum": "35",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:13 CN\/8000",
+            "description": "The dynamic RTP payload types above (except payload type 13 which is static) indicate that <a href=\"http:\/\/en.wikipedia.org\/wiki\/Comfort_noise\">Comfort Noise (CN) <\/a> is going to be used for codecs of rates 48000, 32000, 16000 and 8000 kbits\/s."
+        },
+        {
+            "display": "line",
+            "lineNum": "36",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=rtpmap:126 telephone-event\/8000",
+            "description": "This line indicates the browser supports RFC4733, allowing it to send DTMFs within the RTP not as the usual digitized sine waves but as a special payload (in this case with payload 126 in the RTP packet). This DTMF mechanism ensure that DTMFs will be transmitted independently of the audio codec and the signaling protocol."
+        },
+        {
+            "display": "line",
+            "lineNum": "37",
+            "indent": "2",
+            "section": "音频 -> 音频编解码参数",
+            "lineText": "a=maxptime:60",
+            "description": "maxptime specify the maximum amount of media that can be encapsulated in each packet, expressed as time in milliseconds. The size of the packet can have side effects in the quality of the audio and the BW. It is possible to modify this values in the SDP."
+        },
+        {
+            "display": "grouping",
+            "lineNum": "7",
+            "indent": "2",
+            "section": "音频 SSRC参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "38",
+            "indent": "2",
+            "section": "音频 -> 音频 SSRC参数",
+            "lineText": "a=ssrc:3570614608 cname:4TOk42mSjXCkVIa6",
+            "description": "The <em>cname<\/em> source attribute associates a media source with its <a href=\"http:\/\/www.freesoft.org\/CIE\/RFC\/1889\/24.htm\">Canonical End-Point Identifier<\/a> which will remain constant for the RTP media stream even when the ssrc identifier changes if a conflict is found. This is the value that the media sender will place in its <a href=\"https:\/\/tools.ietf.org\/html\/rfc3550#section-6.5\">RTCP SDES<\/a> packets."
+        },
+        {
+            "display": "line",
+            "lineNum": "39",
+            "indent": "2",
+            "section": "音频 -> 音频 SSRC参数",
+            "lineText": "a=ssrc:3570614608 msid:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS 35429d94-5637-4686-9ecd-7d0622261ce8",
+            "description": "This line is used to signal the association between the RTP concept of SSRC and the WebRTC concept of “media stream” \/ “media stream track” using SDP signaling [<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid\">draft-ietf-mmusic-msid<\/a>]. The first parameter corresponds to the id of the Media Stream and the second onde the if of the Media Stream Track. These ids are handled in the WebRTC API. The first number is the SSRC identifier that will be included in the SSRC field of the RTP packets. "
+        },
+        {
+            "display": "line",
+            "lineNum": "40",
+            "indent": "2",
+            "section": "音频 -> 音频 SSRC参数",
+            "lineText": "a=ssrc:3570614608 mslabel:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS",
+            "description": "The <em>mslabel<\/em> attribute referes to the id of the Media Stream object. Acording these references <a \"http:\/\/www.ietf.org\/mail-archive\/web\/mmusic\/current\/msg09712.html\">[1]<\/a> <a \"https:\/\/lists.w3.org\/Archives\/Public\/public-webrtc\/2014Sep\/0058.html\">[2]<\/a> the parameter is deprecated and <em>msid<\/em> replaces it. <em>mslabel<\/em> is kept for backward compability."
+        },
+        {
+            "display": "line",
+            "lineNum": "41",
+            "indent": "2",
+            "section": "音频 -> 音频 SSRC参数",
+            "lineText": "a=ssrc:3570614608 label:35429d94-5637-4686-9ecd-7d0622261ce8",
+            "description": "The <em>label<\/em> attribute is also deprecated by <em>msid<\/em> and carries a pointer to a RTP media stream in the context of an arbitrary network application that uses SDP. This label correspondes with the <em>Media Stream Track<\/em> id in the WebRTC API, which is included in the <em>msid<\/em> line. "
+        },
+        {
+            "display": "grouping",
+            "lineNum": "8",
+            "indent": "1",
+            "section": "视频"
+        },
+        {
+            "display": "line",
+            "lineNum": "42",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "m=video 60372 UDP\/TLS\/RTP\/SAVPF 100 101 116 117 96",
+            "description": "<p><em>m<\/em> means it is a media line –  it condenses a lot of information on the media attributes of the stream. In this order, it tells us:<ul><li><em>audio<\/em>- the media type is going to be used for the session (media types are registered at the IANA),<\/li><li><em>54278<\/em><span – the port is going to be used for SRTP (and for RTCP if RTCP multiplex is supported by the other peer),<\/li><li><em>RTP\/SAVPF<\/em>- the transport protocol is going to be used for the session, and last but not least<\/li><li><em>100 101 116 117 96<\/em> -  the media format descriptions are supported by the browser to send and receive media.<\/li><\/ul>RTP\/SAVPF is defined in <a href=\"http:\/\/tools.ietf.org\/html\/rfc5124\">RFC5124<\/a>. In short it requires the use of SRTP and SRTCP and RTCP Feedback packets.<\/p><p>The media format descriptions, with protocol RTP\/SAVPF, gives the RTP payload numbers which are going to be used for the different formats.&nbsp; Payload numbers lower than 96 are mapped to encodingformats by the<a href=\"http:\/\/www.iana.org\/assignments\/rtp-parameters\/rtp-parameters.xhtml\">IANA<\/a>.&nbsp;In our SDP<em>0<\/em>maps to G711U and<em>8<\/em>to G711A. Format numbers larger than 95 are dynamic and there are <em>a=rtpmap:<\/em>&nbsp;attribute to map from the RTP payload type numbers to media encoding names.&nbsp; There are also<em>a=fmtp:<\/em> attributes which specify format parameters<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "43",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "c=IN IP4 217.130.243.155",
+            "description": "<em>c<\/em> is a connection line. This line gives the IP from where you expect to send and receive the real time traffic. As ICE is mandatory in WebRTC the IP in the c-line is not going to be used.(em>"
+        },
+        {
+            "display": "line",
+            "lineNum": "44",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=rtcp:64891 IN IP4 217.130.243.155",
+            "description": "This line specifies the IP and port that will used for RTCP if RTCP multiplexing is not supported by the other peer."
+        },
+        {
+            "display": "grouping",
+            "lineNum": "9",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "description": "Next we have the ICE candidates. ICE is the protocol chosen to handle NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way."
+        },
+        {
+            "display": "line",
+            "lineNum": "45",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:1467250027 1 udp 2122260223 192.168.0.196 56143 typ host generation 0",
+            "description": "<p>Next we have the ICE candidates. ICE is the protocol chosen to handle NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260223 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of network resources use. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP. After the priority the IP of the local interface and the port to be used are included.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "46",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:1467250027 2 udp 2122260222 192.168.0.196 58874 typ host generation 0",
+            "description": "<p>Host candidate for RTP on UDP - in this ICE line our browser is giving its host candidates- the IP of the interface or interfaces the browser is listening on the computer. The browser can receive\/send SRTP and SRTCP on that IP in case there is IP visibility with some candidate of the remote peer. For example, if the other computer is on the same LAN, hosts candidates will be used. The number after the protocol (udp) – 2122260223 - is the priority of the candidate. Notice that priority of host candidates is the higher than other candidates as using host candidates are more efficient in terms of network resources use. The first lines (component= 1) is for RTP and second line (component = 2) is for RTCP. After the priority the IP of the local interface and the port to be used are included.  Please note that when the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "47",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:435653019 1 tcp 1518280447 192.168.0.196 0 typ host tcptype active generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "48",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:435653019 2 tcp 1518280446 192.168.0.196 0 typ host tcptype active generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation. When the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "49",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:1853887674 1 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation. When the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "50",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:1853887674 1 udp 1518280447 47.61.61.61 36768 typ srflx raddr 192.168.0.196 rport 36768 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Host candidate for RTP over TCP - These lines are the same as the two ICE lines before but for TCP traffic. Please note that the priority is the lower – i.e 1845501695 is larger - as TCP is not optimal for real-time media transportation. When the browser sends the offer it does not know if the other end will support rtcp-mux, so a port for RTCP has to be offered.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "51",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:750991856 1 udp 25108223 237.30.30.30 60372 typ relay raddr 47.61.61.61 rport 54765 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (2157334355 is higher) so the relay will be used only if there is not Ip connectivity between host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> crrespond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
+        },
+        {
+            "display": "line",
+            "lineNum": "52",
+            "indent": "2",
+            "section": "视频 ICE Candidates",
+            "lineText": "a=candidate:750991856 2 udp 25108222 237.30.30.30 64891 typ relay raddr 47.61.61.61 rport 54767 generation 0",
+            "description": "<p>ICE is the protocol chosen for NAT traversal in WebRTC. You can find a very didactic and comprehensive explanation of ICE <a href=\"http:\/\/www.slideshare.net\/saghul\/ice-4414037\">here<\/a>. ICE is complex enough to deserve its own post, but I will try to explain its SDP lines in an understandable way.<\/p><p>Relay candidate for RTP over UDP - next we have the relay candidates. Those candidates are obtained from a TURN server which must be provisioned when creating the peer connection. Note that the priority here is lower than the host and reflex candidates (2157334355 is higher) so the relay will be used only if “hole punching” is not working with host and reflex candidates. Just for your curiosity we used the open source <a href=\"coturn.net\">coturn<\/a> project in this test (see our post on that <a href=\"https:\/\/webrtchacks.com\/coturn\/\">here<\/a>). The first IP\/port couple corresponds to the IP and port assigned by the TURN server for this media session. <em>raddr<\/em> and <em>rport<\/em> correspond to the public IP and the public port through which the WebRTC enpoint is reaching Internet.<\/p>"
+        },
+        {
+            "display": "grouping",
+            "lineNum": "7",
+            "indent": "2",
+            "section": "视频 ICE 参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "53",
+            "indent": "2",
+            "section": "视频 ICE 参数",
+            "lineText": "a=ice-ufrag:Oyef7uvBlwafI3hT",
+            "description": "Once the ICE candidates have been exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
+        },
+        {
+            "display": "line",
+            "lineNum": "54",
+            "indent": "2",
+            "section": "视频 ICE 参数",
+            "lineText": "a=ice-pwd:T0teqPLNQQOf+5W+ls+P2p16",
+            "description": "Once the ICE candidates have been exchanged, a verification process starts where both browsers try to reach each other using the candidates provided. The <em>ice-ufgra<\/em> and <em>ice-pwd<\/em> credentials are used in that process to avoid receiving potentials attacks from endpoints that are not involved in the session who could potentially create a media session without authorization."
+        },
+        {
+            "display": "grouping",
+            "lineNum": "10",
+            "indent": "2",
+            "section": "视频 DTLS 参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "55",
+            "indent": "2",
+            "section": "视频 -> 视频 DTLS 参数",
+            "lineText": "a=fingerprint:sha-256 49:66:12:17:0D:1C:91:AE:57:4C:C6:36:DD:D5:97:D2:7D:62:C9:9A:7F:B9:A3:F4:70:03:E7:43:91:73:23:5E",
+            "description": "This fingerprint is the result of a hash function (using sha-256 in this case) of the certificates used in the DTLS-SRTP negotiation. This line creates a binding between the signaling (which is supposed to be trusted) and the certificates used in DTLS, if the fingerprint doesn’t match, then the session should be rejected."
+        },
+        {
+            "display": "line",
+            "lineNum": "56",
+            "indent": "2",
+            "section": "视频 -> 视频 DTLS 参数",
+            "lineText": "a=setup:actpass",
+            "description": "This parameter means that this peer can be the server or the client which starts the DTLS negotiation. This parameter was initialing defined in RFC4145, which has been updated by RFC4572."
+        },
+        {
+            "display": "continuation",
+            "lineNum": "2",
+            "indent": "1",
+            "section": "视频"
+        },
+        {
+            "display": "line",
+            "lineNum": "57",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=mid:video",
+            "description": "This is the identifier which is used in the BUNDLE line. As we have different media we have different identifiers for each."
+        },
+        {
+            "display": "line",
+            "lineNum": "58",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=extmap:2 urn:ietf:params:rtp-hdrext:toffset",
+            "description": "Chrome offers to use the timestamp offset header extension as defined in RFC 5450."
+        },
+        {
+            "display": "line",
+            "lineNum": "59",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=extmap:3 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time",
+            "description": "The Absolute Send Time extension is used to stamp RTP packets with a timestamp showing the departure time from the system that put this packet on the wire. See more details at: <a href=\"http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time\">http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time<\/a>"
+        },
+        {
+            "display": "line",
+            "lineNum": "60",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=extmap:4 urn:3gpp:video-orientation",
+            "description": "This extmap line ( the RTP Header Extensions  are specified in IETF RFC 5285) says that Chrome supports Coordination of Video Orientation (CVO) in SDP for all media streams containing video. In short, this extensions allows to inform about the orientation of the camera to the other side so that it can be displayed correctly. Coordination of Video Orientation consists in signalling of the current orientation of the image captured on the sender side to the receiver for appropriate rendering and displaying. For more info check this 3GPP document 3GPP TS 26.114"
+        },
+        {
+            "display": "line",
+            "lineNum": "61",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=sendrecv",
+            "description": "This line says that the browser is willing to both send and receive audio in this session. Other values could be sendonly, recvonly and inactive which are used to implement different scenarios like putting calls on-hold."
+        },
+        {
+            "display": "line",
+            "lineNum": "62",
+            "indent": "1",
+            "section": "视频",
+            "lineText": "a=rtcp-mux",
+            "description": "启用视频rtp和rtcp混流。rtcp mux是一种通过一个socket端口同时传输rtp和rtcp的方法，webrtc规范强制使用rtcp-mux方法，但是许多传统voip设置并不支持此方法，通常都是rtp用一个端口，rtcp用rtp+1端口号，至少目前chrome和firefox都是强制使用rtcp-mux, 所以如果传统voip客户端如果想和webrtc浏览器客户端互通时需要借助中间网关实现转换功能。否则rtcp功能会失效，影响通话效果。"
+        },
+        {
+            "display": "grouping",
+            "lineNum": "11",
+            "indent": "2",
+            "section": "视频编解码参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "63",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtpmap:100 VP8\/90000",
+            "description": "This lines says is that VP8 is asigned to payload type 100. It will mean that the value of the Payload Type field of the RTP packets containing VP8 video frames within this session will be 100. This RFC Draft defines the particularites of VP8 PT: http:\/\/tools.ietf.org\/html\/draft-ietf-payload-vp8 Right now VP8 is only MPI codec in WebRTC. Right now VP8 is the MTI codec for video, things may change in the future."
+        },
+        {
+            "display": "line",
+            "lineNum": "64",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:100 ccm fir",
+            "description": "This lines requests the use of FIR (Full Intraframe Request), as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc5104\">RFC 5104<\/a>. It is included since Chrome M27."
+        },
+        {
+            "display": "line",
+            "lineNum": "65",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:100 nack",
+            "description": "格式为 a=rtcp-fb:{payload} nack  这里的{payload}是具体音频codec的payload值，通过这个属性协商是否支持丢包重传功能，音频重传在处理连续丢包情况下还是有用的，一般内置的opus的fec只能支持n-1到n的丢包保护，而且默认的fec功能即使是开启，编码端也不一定会持续发带fec的包，所以在网络类似发生突然断线又立即恢复，或者网络发生拥塞，导致udp连续丢包情况下，可以利用nack重传，当然，这是以牺牲延迟为代价的，需要根据实际使用场景发起nack请求。"
+        },
+        {
+            "display": "line",
+            "lineNum": "66",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:100 nack pli",
+            "description": "This lines states that PLI NACK RTCP messages are supported. This allows to ask for a new VP8 key frame the other endpoint when video packets have been lost. Please refer to <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585#page-36\">RFC4585<\/a> for more information."
+        },
+        {
+            "display": "line",
+            "lineNum": "67",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:100 goog-remb",
+            "description": "启用 pt 100(vp8) 的goog REMB（google版本REMB）。Receiver Estimated Maximum Bitrate,  接收端最大接收码率估测，接收端会估计本地接收的最大带宽能力，并通过rtcp remb 消息返回给对端，这样对端可以调整自己的发送端码率，达到动态调整带宽得目的，具体消息类型通过rtcp的属性Unique identifier 来区分是remg消息，此部分是四个字节，REMG"
+        },
+        {
+            "display": "line",
+            "lineNum": "68",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtpmap:101 VP9\/90000",
+            "description": "Chrome supports VP9 from version 48. You can learn about the features of this video codec at the Web M project site. By default it appears as the second option in the SDP after VP8."
+        },
+        {
+            "display": "line",
+            "lineNum": "69",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:101 ccm fir",
+            "description": "This lines requests the use of FIR (Full Intraframe Request), as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc5104\">RFC 5104<\/a>. It is included since Chrome M27."
+        },
+        {
+            "display": "line",
+            "lineNum": "70",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:101 nack",
+            "description": "This lines requests the use of Negative ACKs (nack) as indicated in <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585\">RFC 4585<\/a>. This allows to make the other end aware about packet losses.  "
+        },
+        {
+            "display": "line",
+            "lineNum": "71",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:101 nack pli",
+            "description": "This lines states that PLI NACK RTCP messages are supported. This allows to ask for a new VP9 key frame the other endpoint when video packets have been lost. Please refer to <a href=\"https:\/\/tools.ietf.org\/html\/rfc4585#page-36\">RFC4585<\/a> for more information."
+        },
+        {
+            "display": "line",
+            "lineNum": "72",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtcp-fb:101 goog-remb",
+            "description": "启用 pt 101(vp9) 的goog REMB（google版本REMB）。Receiver Estimated Maximum Bitrate,  接收端最大接收码率估测，接收端会估计本地接收的最大带宽能力，并通过rtcp remb 消息返回给对端，这样对端可以调整自己的发送端码率，达到动态调整带宽得目的，具体消息类型通过rtcp的属性Unique identifier 来区分是remg消息，此部分是四个字节，REMG"
+        },
+        {
+            "display": "line",
+            "lineNum": "73",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtpmap:116 red\/90000",
+            "description": "This lines requests the use of RFC2198 which defines a payload format to encode redundant media data. In WebRTC this is used to encapsulate the payload  VP8 (the video payload itself) and FEC (which is explained in the line below).  "
+        },
+        {
+            "display": "line",
+            "lineNum": "74",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtpmap:117 ulpfec\/90000",
+            "description": "This lines requests the use of ULP FEC (defined in RFC5109) . FEC (Forward Error Correction) allows to correct incorrect some kind of errors in data transmission by sending redundant information based on the original packet. FEC is used when there is packet loss (which is reported in RTCP-RR packets)."
+        },
+        {
+            "display": "line",
+            "lineNum": "75",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=rtpmap:96 rtx\/90000",
+            "description": "The parameters rtx and apt are defined in the RFC4588. This RFC defines a RTP payload format just for performing retransmissions of packets which have not been received by the other side. Packets can not be retransmitted using the original payload as it would break RTP and RTCP mechanisms so they are retransmitted in a retransmission stream with a different payload. The 90000 refers to the clockrate of the retransmitted stream which is the same as the original VP8 stream which is, as other video protocols, 90000."
+        },
+        {
+            "display": "line",
+            "lineNum": "76",
+            "indent": "2",
+            "section": "视频 -> 视频编解码参数",
+            "lineText": "a=fmtp:96 apt=100",
+            "description": "This line says that the RTP packets with payload 96 will transport rtx messages for the codec which has been asigned the payload 100 in this SDP (VP8)."
+        },
+        {
+            "display": "grouping",
+            "lineNum": "12",
+            "indent": "2",
+            "section": "视频 SSRC 参数"
+        },
+        {
+            "display": "line",
+            "lineNum": "77",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc-group:FID 2231627014 632943048",
+            "description": "This line declares that SSRC 632943048 is a rtx repair flow (<a href=\"https:\/\/tools.ietf.org/html/rfc4588\">RFC4588<\/a>) for 2231627014 as specified in <a href=\"https:\/\/tools.ietf.org/html/rfc5576\">RFC5576<\/a>"
+        },
+        {
+            "display": "line",
+            "lineNum": "78",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc:2231627014 cname:4TOk42mSjXCkVIa6",
+            "description": "The <em>cname<\/em> source attribute associates a media source with its <a href=\"http:\/\/www.freesoft.org\/CIE\/RFC\/1889\/24.htm\">Canonical End-Point Identifier<\/a> which will remain constant for the RTP media stream. This is the value that the media sender will place in its <a href=\"https:\/\/tools.ietf.org\/html\/rfc3550#section-6.5\">RTCP SDES<\/a> packets."
+        },
+        {
+            "display": "line",
+            "lineNum": "79",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc:2231627014 msid:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS daed9400-d0dd-4db3-b949-422499e96e2d",
+            "description": "This line is used to signal the association between the RTP concept of SSRC and the WebRTC concept of “media stream” \/ “media stream track” using SDP signaling [<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid\">draft-ietf-mmusic-msid<\/a>]. As you can see, the first number is the SSRC identifier that will be included in the SSRC field of the RTP packets. Following <em>msid<\/em>: we have the unique identifier included  in the semantic."
+        },
+        {
+            "display": "line",
+            "lineNum": "80",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc:2231627014 mslabel:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS",
+            "description": "Honestly, I has not been able to totally understand the <em>mslabel<\/em> attribute. Looking at this <a href=\"http:\/\/www.ietf.org\/mail-archive\/web\/mmusic\/current\/msg09780.html\">mail thread<\/a> I understand that is a deprecated attribute which a function similar to msid."
+        },
+        {
+            "display": "line",
+            "lineNum": "81",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc:2231627014 label:daed9400-d0dd-4db3-b949-422499e96e2d",
+            "description": "The second group of ssrc attributes are for the retransmissions stream, note that the cname is the same as in the group above."
+        },
+        {
+            "display": "line",
+            "lineNum": "82",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc:632943048 cname:4TOk42mSjXCkVIa6",
+            "description": "The <em>cname<\/em> source attribute associates a media source with its <a href=\"http:\/\/www.freesoft.org\/CIE\/RFC\/1889\/24.htm\">Canonical End-Point Identifier<\/a> which will remain constant for the RTP media stream. This is the value that the media sender will place in its <a href=\"https:\/\/tools.ietf.org\/html\/rfc3550#section-6.5\">RTCP SDES<\/a> packets."
+        },
+        {
+            "display": "line",
+            "lineNum": "83",
+            "indent": "2",
+            "section": "视频 -> 视频 SSRC 参数",
+            "lineText": "a=ssrc:632943048 msid:lgsCFqt9kN2fVKw5wg3NKqGdATQoltEwOdMS daed9400-d0dd-4db3-b949-422499e96e2d",
+            "description": "This line is used to signal the association between the RTP concept of SSRC and the WebRTC concept of “media stream” \/ “media stream track” using SDP signaling [<a href=\"http:\/\/tools.ietf.org\/html\/draft-ietf-mmusic-msid\">draft-ietf-mmusic-msid<\/a>]. As you can see, the first number is the SSRC identifier that will be included in the SSRC field of the RTP packets. Following <em>msid<\/em>: we have the unique identifier included  in the semantic."
+        }
+    ]
 }

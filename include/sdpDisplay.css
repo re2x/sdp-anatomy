@@ -1,17 +1,29 @@
+body {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+
 /******bootstrap tweaks******/
+
 .list-group-item {
     padding: 5px;
     word-wrap: break-word;
 }
+
 .list-group-item:nth-child(odd) {
     background: whitesmoke;
 }
+
 .well {
     margin: 1px !important;
+    margin-top: 10px !important;
     padding: 5px 10px 5px 10px !important;
 }
 
+
 /******app CSS classes******/
+
 .section-label {
     margin: 10px !important;
     font-weight: bold;
@@ -23,11 +35,13 @@
     font-weight: bold;
     font-size: larger;
 }
+
 .description-line {
     font-style: italic;
     background-color: whitesmoke;
     word-break: break-all;
 }
+
 .description-body {
     margin-top: 10px !important;
 }

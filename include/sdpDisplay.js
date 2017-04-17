@@ -4,15 +4,14 @@
  */
 
 
-$(document).ready(function(){
+$(document).ready(function() {
     //Load & display the data
-    $.getJSON("//raw.githubusercontent.com/webrtcHacks/sdp-anatomy/bootstrap/sdpdata.json", function (sdpdata) {
+    $.getJSON("sdpdata.json", function(sdpdata) {
         var data = sdpdata.sdpdata;
         if (sdpdata.sdpdata.length > 0) {
             console.log(sdpdata.sdpdata.length + " SDP description lines loaded");
             displayData(data)
-        }
-        else {
+        } else {
             console.log("SDP data load error");
         }
     });
@@ -20,9 +19,9 @@ $(document).ready(function(){
     //Keep the description window in view
     //ToDo: see why I couldn't get bootstrap's affix towork
     var startPos = $("#description").offset().top;
-    $(window).scroll(function(){
-       var y = parseInt(startPos - $(document).scrollTop());
-       $('#description').css({'top': (y<0) ? 30:y });
+    $(window).scroll(function() {
+        var y = parseInt(startPos - $(document).scrollTop());
+        $('#description').css({ 'top': (y < 0) ? 30 : y });
 
     });
 
@@ -53,18 +52,15 @@ function displayData(data) {
             };
 
             hoverData.push(lineData);
-        }
-        else if (d.display == "continuation") {
+        } else if (d.display == "continuation") {
             text += '</div>';
             currentIndent = d.indent;
-        }
-        else if (d.display == "grouping") {
+        } else if (d.display == "grouping") {
 
 
             if (d.indent > currentIndent) {
                 text += '<div class="well">';
-            }
-            else if (d.indent < currentIndent) {
+            } else if (d.indent < currentIndent) {
                 for (n = currentIndent - d.indent; n > 0; n--) {
                     text += '</div>';
                 }
@@ -83,12 +79,12 @@ function displayData(data) {
 
     //Show the hover-data
     var i, currentLine, descriptionText, lastHover;
-    $(".list-group-item").hover(function () {
+    $(".list-group-item").hover(function() {
         i = $(this).attr("id");
         $(this).addClass("active");
         $(lastHover).removeClass("active");
         lastHover = this;
-        currentLine = i.slice(-1 * (i.length - 4)) - 1;  //get the line # out of the class name
+        currentLine = i.slice(-1 * (i.length - 4)) - 1; //get the line # out of the class name
 
 
         descriptionText = "<p class='description-label'>" + hoverData[currentLine].section + "</p>" +

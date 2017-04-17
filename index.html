@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Anatomy of a SDP</title>
+    <title>WebRTC SDP 剖析</title>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="include/sdpDisplay.css">
     <script type="text/javascript" src="include/sdpDisplay.js"></script>
 </head>
+
 <body>
     <div class="row">
         <div class="col-sm-12">
-            <h1>Anatomy of a WebRTC SDP</h1>
-            <p>See the source post by Antón Román for more details.</p>
+            <h1>WebRTC SDP 剖析</h1>
+            <p>更多详细信息，请查看 <a href="https://webrtchacks.com/update-anatomy-webrtc-sdp-anton-roman/">AntónRomán的原文</a></p>
+            <p>SDP描述由许多文本行组成，文本行的格式为
+                <类型>=
+                    <值>，
+                        <类型>是一个字母，
+                            <值>是结构化的文本串，其格式依
+                                <类型>而定。</p>
         </div>
     </div>
     <div class="row">
@@ -23,9 +31,10 @@
         </div>
         <div class="col-sm-4">
             <div id="description">
-                Click/Hover your cursor at a code/line to view its description.
+                单击或悬停在代码行上，可查看其描述
             </div>
         </div>
     </div>
 </body>
+
 </html>
